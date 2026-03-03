@@ -1,0 +1,177 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+	/* Ghost2Lead brand tokens */
+	--g-accent: #e8622a;
+	--g-accent-light: #fbe9de;
+	--g-accent-mid: #f4a87c;
+	--g-black: #0d0d0d;
+	--g-white: #ffffff;
+	--g-gray-50: #f8f7f5;
+	--g-gray-100: #f0eee9;
+	--g-gray-200: #ddd9d1;
+	--g-gray-400: #9e9a92;
+	--g-gray-600: #5c5851;
+
+	/* Shadcn tokens mapped to Ghost2Lead palette */
+	--background: #ffffff;
+	--foreground: #0d0d0d;
+	--card: #ffffff;
+	--card-foreground: #0d0d0d;
+	--popover: #ffffff;
+	--popover-foreground: #0d0d0d;
+	--primary: #0d0d0d;
+	--primary-foreground: #ffffff;
+	--secondary: #f0eee9;
+	--secondary-foreground: #0d0d0d;
+	--muted: #f8f7f5;
+	--muted-foreground: #5c5851;
+	--accent: #e8622a;
+	--accent-foreground: #ffffff;
+	--destructive: #e8622a;
+	--destructive-foreground: #ffffff;
+	--border: #f0eee9;
+	--input: #f0eee9;
+	--ring: #e8622a;
+	--chart-1: #e8622a;
+	--chart-2: #6e7de8;
+	--chart-3: #0d0d0d;
+	--chart-4: #f4a87c;
+	--chart-5: #5de898;
+	--radius: 0.5rem;
+	--sidebar: #ffffff;
+	--sidebar-foreground: #0d0d0d;
+	--sidebar-primary: #0d0d0d;
+	--sidebar-primary-foreground: #ffffff;
+	--sidebar-accent: #f0eee9;
+	--sidebar-accent-foreground: #0d0d0d;
+	--sidebar-border: #f0eee9;
+	--sidebar-ring: #e8622a;
+
+	/* Radii from original */
+	--r-sm: 8px;
+	--r-md: 16px;
+	--r-lg: 24px;
+	--r-xl: 32px;
+	--r-pill: 999px;
+
+	/* Shadows */
+	--shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.06);
+	--lift: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+@theme inline {
+	--font-sans: var(--font-dm-sans), "DM Sans", sans-serif;
+	--font-serif:
+		var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
+	--font-mono: "Geist Mono", "Geist Mono Fallback";
+
+	/* Typography scale: 14, 16, 32, 48, 82px */
+	--text-body-sm: 0.875rem; /* 14px */
+	--text-body-sm--line-height: 1.5;
+	--text-body: 1rem; /* 16px */
+	--text-body--line-height: 1.6;
+	--text-heading-sm: 2rem; /* 32px */
+	--text-heading-sm--line-height: 1.2;
+	--text-heading: 3rem; /* 48px */
+	--text-heading--line-height: 1.1;
+	--text-hero: 5.125rem; /* 82px */
+	--text-hero--line-height: 1.05;
+
+	/* Override default scale so text-sm, text-base, etc. use the same scale */
+	--text-xs: 0.875rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1rem;
+	--text-xl: 2rem;
+	--text-2xl: 2rem;
+	--text-3xl: 3rem;
+	--text-4xl: 3rem;
+	--text-5xl: 5.125rem;
+	--text-6xl: 5.125rem;
+	--text-7xl: 5.125rem;
+	--text-8xl: 5.125rem;
+	--text-9xl: 5.125rem;
+
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground text-body;
+	}
+}
+
+/* Dot grid background utility */
+.dot-bg {
+	background-image: radial-gradient(circle, #d6cfc6 1px, transparent 1px);
+	background-size: 22px 22px;
+}
+
+/* Fade up animation */
+@keyframes fadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.fu {
+	animation: fadeUp 0.6s ease both;
+}
+.d1 {
+	animation-delay: 0.1s;
+}
+.d2 {
+	animation-delay: 0.2s;
+}
+.d3 {
+	animation-delay: 0.3s;
+}
+.d4 {
+	animation-delay: 0.45s;
+}
