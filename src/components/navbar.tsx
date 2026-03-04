@@ -88,7 +88,12 @@ export function Navbar() {
 										</Link>
 									))}
 									<div className="flex flex-col gap-2 mt-4 pt-4 border-t border-[var(--g-gray-100)]">
-										<Button asChild variant="ghost" size="default" rounded="pill">
+										<Button
+											asChild
+											variant="ghost"
+											size="default"
+											rounded="pill"
+										>
 											<Link href="/auth" onClick={() => setMobileOpen(false)}>
 												Log in
 											</Link>
