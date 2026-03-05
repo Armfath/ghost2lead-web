@@ -1,6 +1,6 @@
 import { AUTH_FIELDS, TOKEN_TYPE, type USER_TYPES } from "@/constants";
 
-const { EMAIL, OTP, LEAD_ID, USER_TYPE, IS_NEW_USER } = AUTH_FIELDS;
+const { EMAIL, OTP, LEAD_ID, USER_TYPE, IS_NEW_USER, IS_ADMIN } = AUTH_FIELDS;
 const { ACCESS_TOKEN } = TOKEN_TYPE;
 
 declare global {
@@ -21,5 +21,6 @@ declare global {
 	interface TokenData {
 		[ACCESS_TOKEN]: string;
 		[IS_NEW_USER]: boolean;
+		[IS_ADMIN]: boolean;
 	}
 }

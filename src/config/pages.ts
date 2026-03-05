@@ -7,5 +7,6 @@ export const PUBLIC_ROUTES = {
 
 export const PAGES_URLS = {
 	...PUBLIC_ROUTES,
-	USER_DASHBOARD: "/dashboard/user",
+	USER_DASHBOARD: "/user/dashboard",
+	ADMIN_DASHBOARD: "/admin/dashboard",
 } as const;

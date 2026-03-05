@@ -22,7 +22,7 @@ import { trackEventWithLead } from "@/services/analytics-service";
 import { verifyOtp } from "@/services/auth-service";
 
 const { LEAD_ID_KEY, ACCESS_TOKEN_KEY } = STORAGE_KEYS;
-const { EMAIL, OTP, LEAD_ID, IS_NEW_USER } = AUTH_FIELDS;
+const { EMAIL, OTP, LEAD_ID, IS_NEW_USER, IS_ADMIN } = AUTH_FIELDS;
 const { ACCESS_TOKEN } = TOKEN_TYPE;
 const { USER_DASHBOARD } = PAGES_URLS;
 
@@ -48,8 +48,6 @@ export function OTPForm({ email }: OTPFormProps) {
 		defaultValues: { [OTP]: "" },
 	});
 
-	const ILeadId = storage.getItem(LEAD_ID_KEY);
-
 	const handleVerifyOtp = async (data: OtpFormData) => {
 		if (!email) {
 			toast.error("Email is required");
@@ -74,7 +72,12 @@ export function OTPForm({ email }: OTPFormProps) {
 			}
 
 			toast.success("Code verified");
-			router.push(USER_DASHBOARD);
+
+			if (response[IS_ADMIN]) {
+				router.push(PAGES_URLS.ADMIN_DASHBOARD);
+			} else {
+				router.push(USER_DASHBOARD);
+			}
 		} catch (error) {
 			logger.error("AUTH_OTP_VERIFY_ERROR", error);
 			toast.error("Invalid code. Please try again.");
@@ -87,11 +90,6 @@ export function OTPForm({ email }: OTPFormProps) {
 			onSubmit={handleSubmit(handleVerifyOtp)}
 			className="space-y-4"
 		>
-			{ILeadId && (
-				<p className="text-sm text-[var(--g-gray-600)] mb-4">
-					Your lead ID is {ILeadId}
-				</p>
-			)}
 			<div className="flex flex-col items-center space-y-2">
 				<Controller
 					name={OTP}

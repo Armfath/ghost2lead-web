@@ -13,4 +13,5 @@ export const AUTH_FIELDS = {
 	LEAD_ID: "lead_id",
 	USER_TYPE: "user_type",
 	IS_NEW_USER: "is_new_user",
+	IS_ADMIN: "is_admin",
 } as const;

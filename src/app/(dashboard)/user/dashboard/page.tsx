@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { PAGES_URLS } from "@/config/pages";
+import { AUTH_FIELDS, USER_TYPES } from "@/constants/auth";
 import { getServerUserProfile } from "@/services/auth-service";
+
+const { USER_TYPE } = AUTH_FIELDS;
 
 export const metadata: Metadata = {
 	title: "Dashboard — Ghost2Lead",
@@ -15,6 +18,10 @@ export default async function UserDashboardPage() {
 
 	try {
 		const user = await getServerUserProfile(await cookieStore);
+
+		if (user[USER_TYPE] !== USER_TYPES.CUSTOMER) {
+			redirect(PAGES_URLS.ADMIN_DASHBOARD);
+		}
 
 		return (
 			<main>
