@@ -41,7 +41,7 @@ export function EmailForm() {
 	return (
 		<form
 			onSubmit={handleSubmit(handleRequestCode)}
-			className="w-full space-y-3"
+			className="w-full space-y-5"
 		>
 			<div>
 				<Input

@@ -15,9 +15,7 @@ export default function AuthPage() {
 			</h1>
 			<p className="text-sm text-[var(--g-gray-400)] mb-8">
 				Log in or{" "}
-				<span className="text-[var(--g-accent)] font-medium">
-					sign up
-				</span>
+				<span className="text-[var(--g-accent)] font-medium">sign up</span>
 				{" — it's free"}
 			</p>
 
@@ -32,4 +30,3 @@ export default function AuthPage() {
 		</>
 	);
 }
-
