@@ -10,16 +10,10 @@ interface RequestOptions extends RequestInit {
 	cookies?: ServerCookies;
 }
 
-interface FetchResponse<T> {
-	data: T;
-	status: number;
-	statusText: string;
-}
-
 async function fetchWithOptions<T>(
 	url: string,
 	options: RequestOptions,
-): Promise<FetchResponse<T>> {
+): Promise<ApiSuccess<T>> {
 	const { timeout = 0 } = options;
 	const response = await fetch(url, {
 		...options,
@@ -33,18 +27,14 @@ async function fetchWithOptions<T>(
 		throw responseData;
 	}
 
-	return {
-		data: responseData,
-		status: response.status,
-		statusText: response.statusText,
-	};
+	return responseData;
 }
 
 async function request<T>(
 	path: string,
 	options: RequestOptions,
 	accessToken?: string | null,
-): Promise<TApiResponse<T>> {
+): Promise<T> {
 	const token =
 		accessToken ?? getItem(TOKEN_TYPE.ACCESS_TOKEN, options.cookies);
 	if (token) {
@@ -59,7 +49,7 @@ async function request<T>(
 		options,
 	);
 
-	return data as TApiResponse<T>;
+	return data;
 }
 
 export async function get<T>(
@@ -70,7 +60,7 @@ export async function get<T>(
 		accessToken?: string | null;
 		cookies?: ServerCookies;
 	},
-): Promise<TApiResponse<T>> {
+): Promise<T> {
 	const urlParams = new URLSearchParams(
 		Object.fromEntries(
 			Object.entries(options?.params?.searchParams ?? {}).filter(
@@ -99,7 +89,7 @@ export async function post<T>(
 		params?: RequestOptions;
 		cookies?: ServerCookies;
 	},
-): Promise<TApiResponse<T>> {
+): Promise<T> {
 	const isFormData = body instanceof FormData;
 
 	return request<T>(path, {
@@ -118,7 +108,7 @@ export async function patch<T>(
 		config?: RequestOptions;
 		cookies?: ServerCookies;
 	},
-): Promise<TApiResponse<T>> {
+): Promise<T> {
 	const isFormData = body instanceof FormData;
 	return request<T>(path, {
 		method: "PATCH",
@@ -132,7 +122,7 @@ export async function patch<T>(
 export async function del<T>(
 	path: string,
 	config?: RequestOptions,
-): Promise<TApiResponse<T>> {
+): Promise<T> {
 	return request<T>(path, {
 		method: "DELETE",
 		...config,

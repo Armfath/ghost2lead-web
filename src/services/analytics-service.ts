@@ -18,12 +18,12 @@ async function getOrCreateLeadFromBackend(
 ): Promise<string | null> {
 	try {
 		const response = await getOrCreateLead(leadId);
-		return persistLeadIdAndReturn(response.data.id);
+		return persistLeadIdAndReturn(response.id);
 	} catch (error) {
 		const apiError = error as ApiError;
 		if (apiError.error === ERROR_CODE.NOT_FOUND) {
 			const response = await getOrCreateLead();
-			return persistLeadIdAndReturn(response.data.id);
+			return persistLeadIdAndReturn(response.id);
 		}
 		removeItem(LEAD_ID_KEY);
 		throw error;

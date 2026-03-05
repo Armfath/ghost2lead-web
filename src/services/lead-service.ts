@@ -5,8 +5,8 @@ const { CREATE } = API_ENDPOINTS.LEADS;
 
 export async function getOrCreateLead(
 	leadId?: string | null,
-): Promise<ApiSuccess<LeadCreateResponse>> {
-	return post<ApiSuccess<LeadCreateResponse>>(CREATE, {
+): Promise<LeadCreateResponse> {
+	return post<LeadCreateResponse>(CREATE, {
 		lead_id: leadId ?? undefined,
 	});
 }

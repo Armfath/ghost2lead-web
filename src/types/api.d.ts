@@ -1,8 +1,6 @@
 import type { ERROR_CODE, HTTP_STATUS_CODE } from "@/constants/api";
 
 declare global {
-	type TApiResponse<T = unknown> = T;
-
 	type THttpStatusCode =
 		(typeof HTTP_STATUS_CODE)[keyof typeof HTTP_STATUS_CODE];
 
