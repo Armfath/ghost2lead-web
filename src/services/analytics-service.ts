@@ -1,12 +1,12 @@
 import posthog from "posthog-js";
 
-import { STORAGE_KEYS } from "@/config";
+import { STORAGE_KEYS } from "@/constants";
 import { ERROR_CODE } from "@/constants/api";
 import { storage } from "@/lib/storage";
 import { getOrCreateLead } from "@/services/lead-service";
 
 const { getItem, setItem, removeItem } = storage;
-const LEAD_ID_KEY = STORAGE_KEYS.LEAD_ID;
+const { LEAD_ID_KEY } = STORAGE_KEYS;
 
 function persistLeadIdAndReturn(resolvedId: string): string {
 	setItem(LEAD_ID_KEY, resolvedId);

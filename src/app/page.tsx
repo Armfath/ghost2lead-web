@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { PageViewTracker } from "@/components/posthog";
 import { Button } from "@/components/ui/button";
-import { ANALYTICS_EVENTS } from "@/config";
+import { ANALYTICS_EVENTS } from "@/constants";
 import { landingFaqs, landingFeatures } from "@/contents/landing";
 
 export default function Home() {

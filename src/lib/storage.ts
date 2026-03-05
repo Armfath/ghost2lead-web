@@ -41,13 +41,13 @@ function deleteCookie(name: string) {
 }
 
 export const storage = {
-	setItem: (key: string, value: string) => {
+	setItem: (key: TStorageKeys, value: string) => {
 		setCookie(key, value);
 	},
-	getItem: (key: string, serverCookies?: ServerCookies) => {
+	getItem: (key: TStorageKeys, serverCookies?: ServerCookies) => {
 		return getCookie(key, serverCookies);
 	},
-	removeItem: (key: string) => {
+	removeItem: (key: TStorageKeys) => {
 		deleteCookie(key);
 	},
 };
