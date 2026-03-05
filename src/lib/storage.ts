@@ -1,9 +1,5 @@
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
-type ServerCookies =
-	| Map<string, string>
-	| { get: (key: string) => { value: string } | undefined };
-
 function setCookie(name: string, value: string) {
 	if (typeof document !== "undefined") {
 		const expires = new Date();

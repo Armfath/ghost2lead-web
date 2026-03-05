@@ -2,7 +2,11 @@
 
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { AUTH_FIELDS } from "@/constants/auth";
 import { useSendOtp } from "@/hooks/use-send-otp";
+import { requestOtp } from "@/services/auth-service";
+
+const { EMAIL } = AUTH_FIELDS;
 
 interface ResendOtpButtonProps {
 	email: string | null;
@@ -12,7 +16,9 @@ export function ResendOtpButton({ email }: ResendOtpButtonProps) {
 	const { counter, loading, resendOtp } = useSendOtp({
 		initialCount: 30,
 		defaultCounter: 30,
-		sendOtpFn: async () => Promise.resolve(),
+		sendOtpFn: async (payload: { [EMAIL]: string }) => {
+			await requestOtp(payload[EMAIL]);
+		},
 	});
 
 	const handleResend = async () => {
@@ -21,7 +27,7 @@ export function ResendOtpButton({ email }: ResendOtpButtonProps) {
 			return;
 		}
 		try {
-			await resendOtp(email);
+			await resendOtp({ [EMAIL]: email });
 			toast.success("Code resent successfully");
 		} catch (error) {
 			const err = error as Error;
