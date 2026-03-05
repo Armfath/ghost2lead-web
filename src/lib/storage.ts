@@ -1,6 +1,6 @@
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
-function setCookie(name: string, value: string) {
+function setCookie(name: string, value: string | boolean) {
 	if (typeof document !== "undefined") {
 		const expires = new Date();
 		expires.setTime(expires.getTime() + COOKIE_MAX_AGE * 1000);
@@ -37,7 +37,7 @@ function deleteCookie(name: string) {
 }
 
 export const storage = {
-	setItem: (key: TStorageKeys, value: string) => {
+	setItem: (key: TStorageKeys, value: string | boolean) => {
 		setCookie(key, value);
 	},
 	getItem: (key: TStorageKeys, serverCookies?: ServerCookies) => {
