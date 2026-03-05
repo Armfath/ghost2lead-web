@@ -5,7 +5,9 @@ import { CtaSection } from "@/components/cta-section";
 import { FaqSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { PageViewTracker } from "@/components/posthog";
 import { Button } from "@/components/ui/button";
+import { ANALYTICS_EVENTS } from "@/config";
 import { pricingFaqs, proFeatures, starterFeatures } from "@/contents/pricing";
 
 export const metadata: Metadata = {
@@ -17,6 +19,7 @@ export const metadata: Metadata = {
 export default function PricingPage() {
 	return (
 		<main>
+			<PageViewTracker eventName={ANALYTICS_EVENTS.PRICING_PAGE_VIEW} />
 			<Navbar />
 
 			{/* Header */}

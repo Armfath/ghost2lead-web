@@ -1,8 +1,9 @@
+import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals-custom.css";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
-import { Toaster } from "@/components/ui/sonner";
+import { PHProvider } from "@/components/posthog";
 
 const dmSans = DM_Sans({
 	subsets: ["latin"],
@@ -43,11 +44,13 @@ export default function RootLayout({
 			lang="en"
 			className={`${dmSans.variable} ${instrumentSerif.variable}`}
 		>
-			<body className="font-sans antialiased">
-				{children}
-				<Toaster />
-				<Analytics />
-			</body>
+			<PHProvider>
+				<body className="font-sans antialiased">
+					{children}
+					<Toaster />
+					<Analytics />
+				</body>
+			</PHProvider>
 		</html>
 	);
 }

@@ -4,12 +4,15 @@ import { DashboardPreview } from "@/components/dashboard-preview";
 import { FaqSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { PageViewTracker } from "@/components/posthog";
 import { Button } from "@/components/ui/button";
+import { ANALYTICS_EVENTS } from "@/config";
 import { landingFaqs, landingFeatures } from "@/contents/landing";
 
 export default function Home() {
 	return (
 		<main>
+			<PageViewTracker eventName={ANALYTICS_EVENTS.HOME_PAGE_VIEW} />
 			<Navbar />
 
 			{/* Hero */}
