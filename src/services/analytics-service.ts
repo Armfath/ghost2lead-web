@@ -20,12 +20,12 @@ async function getOrCreateLeadFromBackend(
 		const response = await getOrCreateLead(leadId);
 		return persistLeadIdAndReturn(response.id);
 	} catch (error) {
+		removeItem(LEAD_ID_KEY);
 		const apiError = error as ApiError;
 		if (apiError.error === ERROR_CODE.NOT_FOUND) {
 			const response = await getOrCreateLead();
 			return persistLeadIdAndReturn(response.id);
 		}
-		removeItem(LEAD_ID_KEY);
 		throw error;
 	}
 }
