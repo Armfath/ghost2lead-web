@@ -15,4 +15,15 @@ declare global {
 		error: TErrorCode;
 		message: string | Record<string, unknown>;
 	}
+
+	interface PaginationInfo {
+		page: number;
+		page_size: number;
+		total: number;
+	}
+
+	interface PaginationResponse<TItem> {
+		items: TItem[];
+		pagination: PaginationInfo;
+	}
 }

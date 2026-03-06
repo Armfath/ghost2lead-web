@@ -9,6 +9,7 @@ const { getItem, setItem, removeItem } = storage;
 const { LEAD_ID_KEY } = STORAGE_KEYS;
 
 function persistLeadIdAndReturn(resolvedId: string): string {
+	removeItem(LEAD_ID_KEY);
 	setItem(LEAD_ID_KEY, resolvedId);
 	return resolvedId;
 }
@@ -20,7 +21,6 @@ async function getOrCreateLeadFromBackend(
 		const response = await getOrCreateLead(leadId);
 		return persistLeadIdAndReturn(response.id);
 	} catch (error) {
-		removeItem(LEAD_ID_KEY);
 		const apiError = error as ApiError;
 		if (apiError.error === ERROR_CODE.NOT_FOUND) {
 			const response = await getOrCreateLead();

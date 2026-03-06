@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { LeadsTable } from "@/components/features/admin/leads-table";
 import { PAGES_URLS } from "@/config/pages";
 import { AUTH_FIELDS, USER_TYPES } from "@/constants/auth";
 import { getServerUserProfile } from "@/services/auth-service";
@@ -22,22 +23,29 @@ export default async function AdminDashboardPage() {
 			redirect(PAGES_URLS.USER_DASHBOARD);
 		}
 
+		const name =
+			user.email.split("@")[0]?.charAt(0).toUpperCase() +
+			(user.email.split("@")[0]?.slice(1) ?? "");
+
 		return (
-			<main>
-				<section className="pt-10 pb-6 px-6 max-w-[960px] mx-auto">
-					<div className="flex items-baseline justify-between gap-4 flex-wrap">
-						<div>
-							<h1 className="font-serif text-heading-sm md:text-heading tracking-tight text-[var(--g-black)]">
-								Admin dashboard
-							</h1>
-							<p className="mt-2 text-body-sm text-[var(--g-gray-600)] max-w-[520px]">
-								Manage users, settings, and platform. Signed in as{" "}
-								{user[AUTH_FIELDS.EMAIL]}.
-							</p>
-						</div>
+			<section>
+				<div className="flex items-start justify-between gap-4 flex-wrap">
+					<div>
+						<h1 className="font-serif text-heading-sm tracking-tight text-foreground">
+							Dashboard
+						</h1>
+						<p className="mt-1 text-body-sm text-muted-foreground">
+							{"Welcome back, "}
+							{name}
+							{"! Here's what's happening today."}
+						</p>
 					</div>
-				</section>
-			</main>
+				</div>
+
+				<div className="mt-6">
+					<LeadsTable />
+				</div>
+			</section>
 		);
 	} catch {
 		redirect(PAGES_URLS.AUTH);

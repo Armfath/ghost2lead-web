@@ -1,3 +1,4 @@
+import { QueryClientProvider } from "@/components/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals-custom.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -46,7 +47,7 @@ export default function RootLayout({
 		>
 			<PHProvider>
 				<body className="font-sans antialiased">
-					{children}
+					<QueryClientProvider>{children}</QueryClientProvider>
 					<Toaster />
 					<Analytics />
 				</body>
