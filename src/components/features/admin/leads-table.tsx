@@ -4,6 +4,7 @@ import { useLeads } from "@/hooks/queries";
 import { useState } from "react";
 import { AiEnrichIcon } from "@/components/ui/ai-enrich-icon";
 import { Button } from "@/components/ui/button";
+import { VisitorProfileModal } from "@/components/features/admin/visitor-profile-modal";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Table,
@@ -26,6 +27,7 @@ export function LeadsTable() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 	const [pageSize, setPageSize] = useState(Number(PAGE_SIZE_OPTIONS[0]));
+	const [profileLead, setProfileLead] = useState<LeadResponse | null>(null);
 
 	const { data, isLoading, isError, error } = useLeads({
 		page: currentPage,
@@ -133,6 +135,7 @@ export function LeadsTable() {
 									variant="outline"
 									size="sm"
 									className="inline-flex items-center gap-2 text-body-sm"
+									onClick={() => setProfileLead(lead)}
 								>
 									<AiEnrichIcon />
 									<span>AI Enrich</span>
@@ -151,6 +154,13 @@ export function LeadsTable() {
 				onPageSizeChange={handlePageSizeChange}
 				className="flex items-center justify-between px-5 py-3 border-t border-border"
 			/>
+			{profileLead && (
+				<VisitorProfileModal
+					lead={profileLead}
+					open={Boolean(profileLead)}
+					onOpenChange={(open) => !open && setProfileLead(null)}
+				/>
+			)}
 		</div>
 	);
 }
