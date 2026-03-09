@@ -1,7 +1,6 @@
 import { QueryClientProvider } from "@/components/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals-custom.css";
-import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import { PHProvider } from "@/components/posthog";
@@ -49,7 +48,6 @@ export default function RootLayout({
 				<body className="font-sans antialiased">
 					<QueryClientProvider>{children}</QueryClientProvider>
 					<Toaster />
-					<Analytics />
 				</body>
 			</PHProvider>
 		</html>
