@@ -1,30 +1,26 @@
-import { Plus } from "lucide-react";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { EventsTable } from "@/components/features/admin/events-table";
-import { ClickTracker } from "@/components/posthog";
+import { LeadsTable } from "@/components/features/admin/leads-table";
 import { PAGES_URLS } from "@/config/pages";
-import { ANALYTICS_EVENTS } from "@/constants";
 import { AUTH_FIELDS, USER_TYPES } from "@/constants/auth";
 import { getServerUserProfile } from "@/services/auth-service";
 
 const { USER_TYPE } = AUTH_FIELDS;
 
 export const metadata: Metadata = {
-	title: "Dashboard — Ghost2Lead",
-	description:
-		"See your ghost visitors, AI personas, and recommended conversion actions.",
+	title: "Admin Dashboard — Ghost2Lead",
+	description: "Manage Ghost2Lead: users, settings, and platform overview.",
 };
 
-export default async function UserDashboardPage() {
+export default async function AdminDashboardPage() {
 	const cookieStore = cookies();
 
 	try {
 		const user = await getServerUserProfile(await cookieStore);
 
-		if (user[USER_TYPE] !== USER_TYPES.CUSTOMER) {
-			redirect(PAGES_URLS.ADMIN_LEADS);
+		if (user[USER_TYPE] !== USER_TYPES.ADMIN) {
+			redirect(PAGES_URLS.USER_DASHBOARD);
 		}
 
 		const name =
@@ -32,7 +28,7 @@ export default async function UserDashboardPage() {
 			(user.email.split("@")[0]?.slice(1) ?? "");
 
 		return (
-			<section>
+			<section className="space-y-6">
 				<div className="flex items-start justify-between gap-4 flex-wrap">
 					<div>
 						<h1 className="font-serif text-heading-sm tracking-tight text-foreground">
@@ -44,15 +40,9 @@ export default async function UserDashboardPage() {
 							{"! Here's what's happening today."}
 						</p>
 					</div>
-					<ClickTracker eventName={ANALYTICS_EVENTS.EXPORTED_FILE}>
-						<Plus className="size-4" />
-						New Event
-					</ClickTracker>
 				</div>
 
-				<div className="mt-6">
-					<EventsTable />
-				</div>
+				<LeadsTable />
 			</section>
 		);
 	} catch {

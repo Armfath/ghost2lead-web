@@ -19,6 +19,10 @@ const DATE_TIME_OPTIONS: Intl.DateTimeFormatOptions = {
 	minute: "2-digit",
 };
 
+export function toIsoDateString(date: Date): string {
+	return date.toISOString().split("T")[0];
+}
+
 export function formatDisplayDate(
 	value: string | null | undefined,
 	options?: { includeTime?: boolean },

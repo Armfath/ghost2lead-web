@@ -1,11 +1,10 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { useLeads, leadsKeys } from "@/hooks/queries";
 import { useState } from "react";
+import { VisitorProfileModal } from "@/components/features/admin/visitor-profile-modal";
 import { AiEnrichIcon } from "@/components/ui/ai-enrich-icon";
 import { Button } from "@/components/ui/button";
-import { VisitorProfileModal } from "@/components/features/admin/visitor-profile-modal";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Table,
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import { TablePagination } from "@/components/ui/table-pagination";
 import { PAGE_SIZE_OPTIONS } from "@/constants/global";
+import { leadsKeys, useLeads } from "@/hooks/queries";
 import { formatDisplayDate } from "@/lib/utils";
 
 function formatLeadIdDisplay(id: string): string {
@@ -128,7 +128,9 @@ export function LeadsTable() {
 									aria-label={`Select lead #${formatLeadIdDisplay(lead.id)}`}
 								/>
 							</TableCell>
-							<TableCell className="font-medium">#{formatLeadIdDisplay(lead.id)}</TableCell>
+							<TableCell className="font-medium">
+								#{formatLeadIdDisplay(lead.id)}
+							</TableCell>
 							<TableCell className="text-muted-foreground">
 								{formatDisplayDate(lead.enriched_at, { includeTime: true })}
 							</TableCell>

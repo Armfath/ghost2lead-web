@@ -1,23 +1,26 @@
 export const CONFIDENCE_STYLES: Record<
 	ConfidenceLevel,
-	{ color: string; bg: string; dot: string; label: string }
+	{ color: string; bg: string; dot: string; bar: string; label: string }
 > = {
 	High: {
 		color: "#166534",
 		bg: "#DCFCE7",
 		dot: "#22C55E",
+		bar: "#10B981",
 		label: "High confidence",
 	},
 	Medium: {
 		color: "#92400E",
 		bg: "#FEF3C7",
 		dot: "#F59E0B",
+		bar: "#F59E0B",
 		label: "Medium confidence",
 	},
 	Low: {
 		color: "#374151",
 		bg: "#F3F4F6",
 		dot: "#9CA3AF",
+		bar: "#EF4444",
 		label: "Low confidence",
 	},
 };

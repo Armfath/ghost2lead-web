@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { LeadsTable } from "@/components/features/admin/leads-table";
+import { AdminDashboardStatsSection } from "@/components/features/admin/admin-dashboard-stats-section";
 import { PAGES_URLS } from "@/config/pages";
 import { AUTH_FIELDS, USER_TYPES } from "@/constants/auth";
 import { getServerUserProfile } from "@/services/auth-service";
@@ -9,11 +9,11 @@ import { getServerUserProfile } from "@/services/auth-service";
 const { USER_TYPE } = AUTH_FIELDS;
 
 export const metadata: Metadata = {
-	title: "Admin Dashboard — Ghost2Lead",
-	description: "Manage Ghost2Lead: users, settings, and platform overview.",
+	title: "Overview — Ghost2Lead Admin",
+	description: "Key metrics and analytics for Ghost2Lead.",
 };
 
-export default async function AdminDashboardPage() {
+export default async function AdminOverviewPage() {
 	const cookieStore = cookies();
 
 	try {
@@ -23,28 +23,18 @@ export default async function AdminDashboardPage() {
 			redirect(PAGES_URLS.USER_DASHBOARD);
 		}
 
-		const name =
-			user.email.split("@")[0]?.charAt(0).toUpperCase() +
-			(user.email.split("@")[0]?.slice(1) ?? "");
-
 		return (
-			<section>
-				<div className="flex items-start justify-between gap-4 flex-wrap">
-					<div>
-						<h1 className="font-serif text-heading-sm tracking-tight text-foreground">
-							Dashboard
-						</h1>
-						<p className="mt-1 text-body-sm text-muted-foreground">
-							{"Welcome back, "}
-							{name}
-							{"! Here's what's happening today."}
-						</p>
-					</div>
+			<section className="space-y-6">
+				<div>
+					<h1 className="font-serif text-heading-sm tracking-tight text-foreground">
+						Overview
+					</h1>
+					<p className="mt-1 text-body-sm text-muted-foreground">
+						Key metrics and analytics at a glance.
+					</p>
 				</div>
 
-				<div className="mt-6">
-					<LeadsTable />
-				</div>
+				<AdminDashboardStatsSection />
 			</section>
 		);
 	} catch {

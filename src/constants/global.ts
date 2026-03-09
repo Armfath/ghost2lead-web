@@ -10,3 +10,7 @@ export const APP_MODE = {
 } as const;
 
 export const PAGE_SIZE_OPTIONS = ["10", "20", "50", "100"];
+
+export const MS_PER_DAY = 86_400_000;
+
+export const ADMIN_DEFAULT_RANGE_DAYS = 30;

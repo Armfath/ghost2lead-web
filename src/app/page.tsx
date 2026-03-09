@@ -2,12 +2,12 @@ import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
 import { DashboardPreview } from "@/components/dashboard-preview";
 import { FaqSection } from "@/components/faq-section";
-import { Footer } from "@/layout/footer";
-import { Navbar } from "@/layout/navbar";
 import { PageViewTracker } from "@/components/posthog";
 import { Button } from "@/components/ui/button";
 import { ANALYTICS_EVENTS } from "@/constants";
 import { landingFaqs, landingFeatures } from "@/contents/landing";
+import { Footer } from "@/layout/footer";
+import { Navbar } from "@/layout/navbar";
 
 export default function Home() {
 	return (

@@ -9,4 +9,11 @@ export const API_ENDPOINTS = {
 		ENRICH: "/api/v1/leads",
 		GET_LEADS: "/api/v1/leads",
 	},
+	STATS: {
+		LEADS_SUMMARY: "/api/v1/stats/leads/summary",
+		FUNNEL: "/api/v1/stats/funnel",
+		LOST_OPPORTUNITIES: "/api/v1/stats/lost-opportunities",
+		LEADS_OVER_TIME: "/api/v1/stats/leads/over-time",
+		ENRICHMENT: "/api/v1/stats/enrichment",
+	},
 } as const;

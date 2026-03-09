@@ -74,7 +74,7 @@ export function OTPForm({ email }: OTPFormProps) {
 			toast.success("Code verified");
 
 			if (response[IS_ADMIN]) {
-				router.push(PAGES_URLS.ADMIN_DASHBOARD);
+				router.push(PAGES_URLS.ADMIN_LEADS);
 			} else {
 				router.push(USER_DASHBOARD);
 			}

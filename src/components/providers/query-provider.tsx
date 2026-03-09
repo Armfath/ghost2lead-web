@@ -10,7 +10,9 @@ const DEFAULT_STALE_TIME_MS = 60_000;
 
 export function QueryClientProvider({
 	children,
-}: { children: React.ReactNode }) {
+}: {
+	children: React.ReactNode;
+}) {
 	const [queryClient] = useState(
 		() =>
 			new QueryClient({

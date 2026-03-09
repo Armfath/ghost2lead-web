@@ -3,12 +3,12 @@ import Link from "next/link";
 import { CheckIcon } from "@/components/check-icon";
 import { CtaSection } from "@/components/cta-section";
 import { FaqSection } from "@/components/faq-section";
-import { Footer } from "@/layout/footer";
-import { Navbar } from "@/layout/navbar";
 import { PageViewTracker } from "@/components/posthog";
 import { Button } from "@/components/ui/button";
 import { ANALYTICS_EVENTS } from "@/constants";
 import { pricingFaqs, proFeatures, starterFeatures } from "@/contents/pricing";
+import { Footer } from "@/layout/footer";
+import { Navbar } from "@/layout/navbar";
 
 export const metadata: Metadata = {
 	title: "Pricing — Ghost2Lead",

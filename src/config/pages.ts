@@ -8,5 +8,6 @@ export const PUBLIC_ROUTES = {
 export const PAGES_URLS = {
 	...PUBLIC_ROUTES,
 	USER_DASHBOARD: "/user/dashboard",
+	ADMIN_LEADS: "/admin/leads",
 	ADMIN_DASHBOARD: "/admin/dashboard",
 } as const;
