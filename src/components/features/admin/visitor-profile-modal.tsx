@@ -2,12 +2,15 @@
 
 import { ChevronDown, RefreshCcwIcon, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { VisitorProfileEmptyState } from "@/components/features/admin/visitor-profile-empty-state";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Spinner } from "@/components/ui/spinner";
 import { CONFIDENCE_STYLES, DEFAULT_BEHAVIORS } from "@/constants/lead";
 import { cn, formatDisplayDate } from "@/lib/utils";
+import { enrichLead } from "@/services/lead-service";
 
 function StatChip({
 	label,
@@ -107,18 +110,38 @@ interface VisitorProfileModalProps {
 	lead: LeadResponse;
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
+	onLeadUpdated?: (lead: LeadResponse) => void;
 }
 
 export function VisitorProfileModal({
 	lead,
 	open,
 	onOpenChange,
+	onLeadUpdated,
 }: VisitorProfileModalProps) {
 	const behaviors = lead.behaviors ?? DEFAULT_BEHAVIORS;
 	const profile = lead.profile;
 	const actions = lead.actions ?? [];
 	const isEnriched = Boolean(lead.enriched_at);
 	const [tab, setTab] = useState<"overview" | "actions">("overview");
+	const [isEnriching, setIsEnriching] = useState(false);
+
+	async function handleEnrich() {
+		setIsEnriching(true);
+		try {
+			const updated = await enrichLead(lead.id);
+			onLeadUpdated?.(updated);
+			toast.success("Visitor analyzed successfully");
+		} catch (err) {
+			const message =
+				err && typeof err === "object" && "message" in err
+					? String((err as { message: unknown }).message)
+					: "Enrichment failed";
+			toast.error(message);
+		} finally {
+			setIsEnriching(false);
+		}
+	}
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
@@ -227,6 +250,8 @@ export function VisitorProfileModal({
 						{!isEnriched && (
 							<VisitorProfileEmptyState
 								firstSeenAt={behaviors.first_visit_at}
+								onAnalyzeClick={handleEnrich}
+								isAnalyzing={isEnriching}
 							/>
 						)}
 						{isEnriched && tab === "overview" && profile && (
@@ -316,9 +341,19 @@ export function VisitorProfileModal({
 							<span className="text-[11px] text-[var(--g-gray-400)]">
 								Updated {formatDisplayDate(lead.updated_at)}
 							</span>
-							<Button variant="default" size="sm" rounded="pill">
-								<RefreshCcwIcon className="size-4" />
-								<span>Re-analyze Visitor</span>
+							<Button
+								variant="default"
+								size="sm"
+								rounded="pill"
+								onClick={handleEnrich}
+								disabled={isEnriching}
+							>
+								{isEnriching ? (
+									<Spinner className="size-4 text-white" />
+								) : (
+									<RefreshCcwIcon className="size-4" />
+								)}
+								<span>{isEnriching ? "Analyzing…" : "Re-analyze Visitor"}</span>
 							</Button>
 						</div>
 					)}

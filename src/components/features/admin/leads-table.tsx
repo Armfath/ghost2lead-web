@@ -1,6 +1,7 @@
 "use client";
 
-import { useLeads } from "@/hooks/queries";
+import { useQueryClient } from "@tanstack/react-query";
+import { useLeads, leadsKeys } from "@/hooks/queries";
 import { useState } from "react";
 import { AiEnrichIcon } from "@/components/ui/ai-enrich-icon";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ function formatLeadIdDisplay(id: string): string {
 }
 
 export function LeadsTable() {
+	const queryClient = useQueryClient();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 	const [pageSize, setPageSize] = useState(Number(PAGE_SIZE_OPTIONS[0]));
@@ -159,6 +161,10 @@ export function LeadsTable() {
 					lead={profileLead}
 					open={Boolean(profileLead)}
 					onOpenChange={(open) => !open && setProfileLead(null)}
+					onLeadUpdated={(updated) => {
+						setProfileLead(updated);
+						queryClient.invalidateQueries({ queryKey: leadsKeys.all });
+					}}
 				/>
 			)}
 		</div>

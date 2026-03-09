@@ -1,7 +1,7 @@
 import { API_ENDPOINTS } from "@/config";
 import { get, post } from "@/lib/fetch";
 
-const { CREATE, GET_LEADS } = API_ENDPOINTS.LEADS;
+const { CREATE, ENRICH, GET_LEADS } = API_ENDPOINTS.LEADS;
 
 export async function getOrCreateLead(
 	leadId?: string | null,
@@ -27,4 +27,8 @@ export async function getLeads(
 			},
 		},
 	});
+}
+
+export async function enrichLead(leadId: string): Promise<LeadResponse> {
+	return post<LeadResponse>(`${ENRICH}/${leadId}/enrich`, {});
 }

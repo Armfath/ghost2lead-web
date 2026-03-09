@@ -1,13 +1,18 @@
 import { AiEnrichIcon } from "@/components/ui/ai-enrich-icon";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { formatDisplayDate } from "@/lib/utils";
 
 interface VisitorProfileEmptyStateProps {
 	firstSeenAt: string | null;
+	onAnalyzeClick?: () => void;
+	isAnalyzing?: boolean;
 }
 
 export function VisitorProfileEmptyState({
 	firstSeenAt,
+	onAnalyzeClick,
+	isAnalyzing = false,
 }: VisitorProfileEmptyStateProps) {
 	return (
 		<div className="flex flex-col items-center gap-4 px-2 pt-4 text-center">
@@ -23,10 +28,26 @@ export function VisitorProfileEmptyState({
 					their persona, intent signals, and conversion actions.
 				</p>
 			</div>
-			<Button variant="default" size="pill-md" rounded="pill" className="mt-1">
-				<AiEnrichIcon />
-				<span>Analyze this Visitor</span>
+			<Button
+				variant="default"
+				size="pill-md"
+				rounded="pill"
+				className="mt-1"
+				onClick={onAnalyzeClick}
+				disabled={isAnalyzing}
+			>
+				{isAnalyzing ? (
+					<Spinner className="size-4 text-white" />
+				) : (
+					<AiEnrichIcon />
+				)}
+				<span>{isAnalyzing ? "Analyzing…" : "Analyze this Visitor"}</span>
 			</Button>
+			{isAnalyzing && (
+				<p className="text-[11px] text-[var(--g-gray-500)]">
+					This might take a moment.
+				</p>
+			)}
 			<p className="text-[11px] text-[var(--g-gray-400)]">
 				First seen {formatDisplayDate(firstSeenAt, { includeTime: true })}
 			</p>
