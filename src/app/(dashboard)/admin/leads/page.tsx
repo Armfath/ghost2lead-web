@@ -23,22 +23,16 @@ export default async function AdminDashboardPage() {
 			redirect(PAGES_URLS.USER_DASHBOARD);
 		}
 
-		const name =
-			user.email.split("@")[0]?.charAt(0).toUpperCase() +
-			(user.email.split("@")[0]?.slice(1) ?? "");
-
 		return (
 			<section className="space-y-6">
 				<div className="flex items-start justify-between gap-4 flex-wrap">
 					<div>
-						<h1 className="font-serif text-heading-sm tracking-tight text-foreground">
-							Dashboard
-						</h1>
-						<p className="mt-1 text-body-sm text-muted-foreground">
-							{"Welcome back, "}
-							{name}
-							{"! Here's what's happening today."}
-						</p>
+					<h1 className="font-serif text-heading-sm tracking-tight text-foreground">
+						Leads
+					</h1>
+					<p className="mt-1 text-body-sm text-muted-foreground">
+						All captured visitors and their activity across your sites.
+					</p>
 					</div>
 				</div>
 
