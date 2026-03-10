@@ -4,6 +4,7 @@ import { DashboardPreview } from "@/components/dashboard-preview";
 import { FaqSection } from "@/components/faq-section";
 import { PageViewTracker } from "@/components/posthog";
 import { Button } from "@/components/ui/button";
+import { PAGES_URLS } from "@/config";
 import { ANALYTICS_EVENTS } from "@/constants";
 import { landingFaqs, landingFeatures } from "@/contents/landing";
 import { Footer } from "@/layout/footer";
@@ -38,7 +39,7 @@ export default function Home() {
 						<Link href="/auth">Start for free</Link>
 					</Button>
 					<Button asChild variant="outline" size="pill-lg" rounded="pill">
-						<Link href="/pricing">See pricing</Link>
+						<Link href={PAGES_URLS.PRICING}>See pricing</Link>
 					</Button>
 				</div>
 			</section>

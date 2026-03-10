@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
+import { PAGES_URLS } from "@/config";
 
 export function Footer() {
 	return (
@@ -30,7 +31,7 @@ export function Footer() {
 							AI Personas
 						</Link>
 						<Link
-							href="/pricing"
+							href={PAGES_URLS.PRICING}
 							className="block text-body-sm text-[var(--g-accent)] py-[3px] hover:opacity-70 transition-opacity"
 						>
 							Pricing

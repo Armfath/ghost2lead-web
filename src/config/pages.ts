@@ -3,6 +3,7 @@ export const PUBLIC_ROUTES = {
 	AUTH: "/auth",
 	VERIFY_OTP: "/verify-otp",
 	OATH_FALLBACK: "/oath-fallback",
+	PRICING: "/pricing",
 } as const;
 
 export const PAGES_URLS = {
